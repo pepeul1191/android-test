@@ -1,14 +1,18 @@
 package softweb.pe.testpp;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.SyncStateContract;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import utils.Constants;
@@ -51,6 +55,18 @@ public class LoginActivity extends AppCompatActivity {
                     }else if(httpartyLogin.getRpta().equalsIgnoreCase("1")){
                         lblMensaje.setText("OK... =)");
                         lblMensaje.setTextColor(getResources().getColor(R.color.verdeQuinua));
+
+                        Constants.set("autenticado", "true");
+
+                        new Handler().post(new Runnable(){
+
+                            @Override
+                            public void run() {
+                                Intent loginIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                                startActivity(loginIntent);
+                                finish();
+                            }
+                        });
                     }
                 }catch (Exception e){
                     rpta = e.toString();
