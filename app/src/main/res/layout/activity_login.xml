@@ -52,14 +52,23 @@
             android:id="@+id/btnIngresar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtContrasenia"
-            android:layout_marginTop="24dp"
             android:background="@color/amarilloQuinua"
             android:text="INGRESAR"
-            android:textColor="@color/blancoQuinua" />
+            android:textColor="@color/blancoQuinua"
+            android:layout_below="@+id/lblMensaje"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/lblMensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtContrasenia"
+             />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
