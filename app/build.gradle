@@ -24,11 +24,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.j256.ormlite:ormlite-jdbc:5.0'
-    compile 'com.google.code.gson:gson-parent:2.8.1'
+    //compile 'com.j256.ormlite:ormlite-jdbc:5.0'
+    compile 'com.j256.ormlite:ormlite-android:5.0'
+    compile 'com.google.code.gson:gson:2.8.1'
     compile 'org.xerial:sqlite-jdbc:3.18.0'
 
     testCompile 'junit:junit:4.12'
