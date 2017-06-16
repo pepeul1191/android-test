@@ -21,14 +21,12 @@ import models.Sesion;
 import utils.Constants;
 import utils.DatabaseHelper;
 import utils.Httparty;
-import utils.SesionDBHelper;
 
 public class LoginActivity extends AppCompatActivity {
     private Button btnIngresar;
     private EditText txtUsuario;
     private EditText txtContrasenia;
     private TextView lblMensaje;
-    private SesionDBHelper sdbh ;
     // Reference of DatabaseHelper class to access its DAOs and other components
     private DatabaseHelper databaseHelper = null;
 
@@ -41,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         this.txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         this.txtContrasenia = (EditText) findViewById(R.id.txtContrasenia);
         this.lblMensaje = (TextView) findViewById(R.id.lblMensaje);
-
-        this.sdbh = new SesionDBHelper(this);
     }
 
     private DatabaseHelper getHelper() {
@@ -95,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void run() {
-                        Intent loginIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent loginIntent = new Intent(LoginActivity.this, ApplicationActivity.class);
                         startActivity(loginIntent);
                         finish();
                     }

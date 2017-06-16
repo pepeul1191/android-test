@@ -46,3 +46,5 @@ public class Sesion implements Serializable {
         this.valor = valor;
     }
 }
+
+//http://www.androidbegin.com/tutorial/android-ormlite-with-sqlite-database-tutorial/

@@ -16,18 +16,15 @@ import java.util.Iterator;
 
 import models.Sesion;
 import utils.DatabaseHelper;
-import utils.SesionDBHelper;
 
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 4000;
-    private SesionDBHelper sdbh ;
     // Reference of DatabaseHelper class to access its DAOs and other components
     private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.sdbh = new SesionDBHelper(this);
 
         setContentView(R.layout.activity_main);
 
@@ -60,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(loginIntent);
                     finish();
                 }else {
-                    Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
-                    startActivity(homeIntent);
+                    Intent applicationIntent = new Intent(MainActivity.this, ApplicationActivity.class);
+                    startActivity(applicationIntent);
                     finish();
                 }
             }
