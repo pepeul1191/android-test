@@ -3,6 +3,7 @@ package softweb.pe.testpp;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtUsuario;
     private EditText txtContrasenia;
     private TextView lblMensaje;
+    private TextView lblReenvio;
     // Reference of DatabaseHelper class to access its DAOs and other components
     private DatabaseHelper databaseHelper = null;
 
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         this.txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         this.txtContrasenia = (EditText) findViewById(R.id.txtContrasenia);
         this.lblMensaje = (TextView) findViewById(R.id.lblMensaje);
+        this.lblReenvio = (TextView) findViewById(R.id.lblReenvio);
     }
 
     private DatabaseHelper getHelper() {
@@ -105,5 +108,14 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("app", "1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         Log.d("rpta", rpta);
         Log.d("app", "2 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    }
+
+    public void lblReenvioClick(View v) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(LoginActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.fragment_reenvio, null);
+        Log.d("lblReenvioClick","HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!");
+        mBuilder.setView(mView);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
     }
 }
