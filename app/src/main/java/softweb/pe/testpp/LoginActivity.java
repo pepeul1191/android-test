@@ -1,6 +1,11 @@
 package softweb.pe.testpp;
 
+import android.app.Activity;
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -23,7 +29,7 @@ import utils.Constants;
 import utils.DatabaseHelper;
 import utils.Httparty;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ReenvioFragment.OnFragmentInteractionListener{
     private Button btnIngresar;
     private EditText txtUsuario;
     private EditText txtContrasenia;
@@ -113,9 +119,17 @@ public class LoginActivity extends AppCompatActivity {
     public void lblReenvioClick(View v) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(LoginActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.fragment_reenvio, null);
-        Log.d("lblReenvioClick","HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!");
-        mBuilder.setView(mView);
-        AlertDialog dialog = mBuilder.create();
-        dialog.show();
+        Log.d("lblReenvioClick","ANTES");
+
+        FragmentManager fm = getFragmentManager();
+        ReenvioFragment dialogFragment = new ReenvioFragment ();
+        dialogFragment.show(fm, "Sample Fragment");
+
+        Log.d("lblReenvioClick","DESPUES");
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
