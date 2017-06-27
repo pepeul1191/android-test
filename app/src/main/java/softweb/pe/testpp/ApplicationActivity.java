@@ -1,10 +1,14 @@
 package softweb.pe.testpp;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class ApplicationActivity extends AppCompatActivity {
@@ -18,7 +22,13 @@ public class ApplicationActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(ApplicationActivity.this);
+                    View mView = getLayoutInflater().inflate(R.layout.fragment_reenvio, null);
+                    Log.d("lblReenvioClick","ANTES");
+
+                    FragmentManager fm = getFragmentManager();
+                    ReenvioFragment dialogFragment = new ReenvioFragment ();
+                    dialogFragment.show(fm, "Sample Fragment");
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
