@@ -8,18 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,7 +27,7 @@ import utils.Httparty;
  * Created by pepe on 27/06/17.
  */
 
-public class MapaFragment extends Fragment implements OnMapReadyCallback {
+public class MapaFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private static final String TAG = "MapaFrgment";
     MapView mapView;
     GoogleMap googleMap;
@@ -70,8 +67,9 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
                 LatLng estacionMapa = new LatLng(latitud, longitud);
                 googleMap.getUiSettings().setZoomControlsEnabled(true);
-                googleMap.addMarker(new MarkerOptions().position(estacionMapa).title(descripcion));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(estacionMapa, 5));
+                Marker estacion = googleMap.addMarker(new MarkerOptions().position(estacionMapa));
+                estacion.setTag(estacionJson.getInt("ide_estacion"));
+                googleMap.setOnMarkerClickListener(this);
             }
 
             LatLng peru = new LatLng(-10.569220973686791, -75.20462410000005);
@@ -80,6 +78,12 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
         }catch (Exception e){
             Log.d("TRY1", e.toString());
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker){
+        Log.d("onMarkerClick", marker.getTag().toString());
+        return false;
     }
 
     @Override
