@@ -1,6 +1,7 @@
 package softweb.pe.testpp;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,16 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import utils.Constants;
+import utils.Httparty;
 
 /**
  * Created by pepe on 27/06/17.
@@ -41,10 +52,30 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng peru = new LatLng(-10.569220973686791, -75.20462410000005);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
-        googleMap.addMarker(new MarkerOptions().position(peru).title("Hola desde Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(peru, 5));
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        try{
+            String urlEstaciones = Constants.BASE_URL + "estacion/listar";
+            Httparty httpartyEstacion = new Httparty(urlEstaciones, "GET");
+            httpartyEstacion.action();
+
+            JSONArray estacionesJsonArray = new JSONArray(httpartyEstacion.getRpta());
+
+            for(int i = 0; i < estacionesJsonArray.length(); i++){
+                JSONObject estacionJson = estacionesJsonArray.getJSONObject(i);
+                double latitud = estacionJson.getDouble("latitud");
+                double longitud = estacionJson.getDouble("longitud");
+                String descripcion = estacionJson.getString("descripcion");
+
+                LatLng estacionMapa = new LatLng(latitud, longitud);
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+                googleMap.addMarker(new MarkerOptions().position(estacionMapa).title(descripcion));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(estacionMapa, 5));
+            }
+        }catch (Exception e){
+            Log.d("TRY1", e.toString());
+        }
     }
 
     @Override
