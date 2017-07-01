@@ -73,6 +73,10 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
                 googleMap.addMarker(new MarkerOptions().position(estacionMapa).title(descripcion));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(estacionMapa, 5));
             }
+
+            LatLng peru = new LatLng(-10.569220973686791, -75.20462410000005);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(peru, 5));
         }catch (Exception e){
             Log.d("TRY1", e.toString());
         }
