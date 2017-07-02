@@ -82,7 +82,22 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
 
     @Override
     public boolean onMarkerClick(final Marker marker){
-        Log.d("onMarkerClick", marker.getTag().toString());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        try{
+            String urlDetalleEstacion = Constants.BASE_URL + "estacion/detalle/" + marker.getTag().toString();
+            Httparty httpartyDetalleEstacion = new Httparty(urlDetalleEstacion, "GET");
+            httpartyDetalleEstacion .action();
+
+            //JSONArray estacionesJsonArray = new JSONArray(httpartyDetalleEstacion.getRpta());
+
+            Log.d("onMarkerClick", marker.getTag().toString());
+            Log.d("onMarkerClick - RPTA", httpartyDetalleEstacion.getRpta());
+        }catch (Exception e){
+            Log.d("TRY1", e.toString());
+        }
+
         return false;
     }
 
