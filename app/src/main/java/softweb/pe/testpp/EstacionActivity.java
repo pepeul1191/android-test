@@ -3,15 +3,20 @@ package softweb.pe.testpp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import adapters.EstacionesAdapter;
 
 public class EstacionActivity extends AppCompatActivity {
     private TextView txtNombre;
     private TextView txtDescipcion;
+    private ListView listSensores;
+    private EstacionesAdapter estacionesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +30,23 @@ public class EstacionActivity extends AppCompatActivity {
         String detalleEstacionString = getIntent().getStringExtra("detalleEstacion");
         Log.d("onMarkerClick - EstacionActivity", detalleEstacionString);
 
-        JsonElement jelement = new JsonParser().parse(detalleEstacionString);
-        JsonObject jobject = jelement.getAsJsonObject();
+        JSONObject jobject = null;
+        try {
+            jobject = new JSONObject(detalleEstacionString);
+            this.txtNombre.setText(jobject.getString("nombre_estacion"));
+            this.txtDescipcion.setText(jobject.getString("descripcion"));
 
-        Log.d("onMarkerClick - EstacionActivity JSON", jobject.toString());
-        Log.d("DESCRIPCION", jobject.get("descripcion").getAsString());
-        Log.d("NOMBRE_ESTACION", jobject.get("nombre_estacion").getAsString());
-        this.txtNombre.setText(jobject.get("nombre_estacion").getAsString());
-        this.txtDescipcion.setText(jobject.get("descripcion").getAsString());
+            //JSONArray sensoresJsonArray = new JSONArray(httpartyEstacion.getRpta());
+
+            JSONArray sensoresJsonArray = jobject.getJSONArray("sensores");
+
+            ListView listSensores = (ListView) findViewById(R.id.listSensores);
+            this.estacionesAdapter = new EstacionesAdapter(EstacionActivity.this, sensoresJsonArray);
+            listSensores.setAdapter(this.estacionesAdapter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
