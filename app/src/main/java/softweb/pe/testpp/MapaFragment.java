@@ -1,5 +1,6 @@
 package softweb.pe.testpp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -93,7 +94,11 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             //JSONArray estacionesJsonArray = new JSONArray(httpartyDetalleEstacion.getRpta());
 
             Log.d("onMarkerClick", marker.getTag().toString());
-            Log.d("onMarkerClick - RPTA", httpartyDetalleEstacion.getRpta());
+            Log.d("onMarkerClick - MapaFragment", httpartyDetalleEstacion.getRpta());
+
+            Intent myIntent = new Intent(this.getActivity(), EstacionActivity.class);
+            myIntent.putExtra("detalleEstacion", httpartyDetalleEstacion.getRpta());
+            this.getActivity().startActivity(myIntent);
         }catch (Exception e){
             Log.d("TRY1", e.toString());
         }

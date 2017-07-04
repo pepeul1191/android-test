@@ -37,6 +37,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,8 +51,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ApplicationActivity"
-            android:label="@string/title_activity_application" >
-
+            android:label="@string/title_activity_application">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,8 +72,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
+        <activity android:name=".EstacionActivity"></activity>
     </application>
 
 </manifest>
