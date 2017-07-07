@@ -41,7 +41,7 @@ public class EstacionActivity extends AppCompatActivity {
             JSONArray sensoresJsonArray = jobject.getJSONArray("sensores");
 
             ListView listSensores = (ListView) findViewById(R.id.listSensores);
-            this.estacionesAdapter = new EstacionesAdapter(EstacionActivity.this, sensoresJsonArray);
+            this.estacionesAdapter = new EstacionesAdapter(EstacionActivity.this, sensoresJsonArray, getResources(), getPackageName());
             listSensores.setAdapter(this.estacionesAdapter);
         } catch (JSONException e) {
             e.printStackTrace();

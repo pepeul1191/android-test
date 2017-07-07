@@ -1,9 +1,12 @@
 package adapters;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -12,16 +15,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 import softweb.pe.testpp.R;
 
 
 public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
     private final Activity activity;
     private final JSONArray jsonArray;
+    private final Resources resources;
+    private HashMap<String, String> iconos = new HashMap<>();
+    private final String packageName;
 
-    public EstacionesAdapter(Activity activity, JSONArray jsonArray) {
+    public EstacionesAdapter(Activity activity, JSONArray jsonArray, Resources resources, String packageName) {
         this.activity = activity;
         this.jsonArray = jsonArray;
+        this.iconos.put("nudo","ic_viento");
+        this.iconos.put("grados celsius","ic_temperatura");
+        this.iconos.put("milibares","ic_lluvia");
+        this.resources = resources;
+        this.packageName = packageName;
     }
 
     @Override
@@ -62,10 +75,15 @@ public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
         TextView txtNombreSensor = (TextView)convertView.findViewById(R.id.txtNombreSensor);
         TextView txtDescripcionInstrumento = (TextView)convertView.findViewById(R.id.txtDescripcionInstrumento);
         TextView txtDescripcionTipo = (TextView)convertView.findViewById(R.id.txtDescripcionTipo);
+        ImageView imgIcono = (ImageView)convertView.findViewById(R.id.imgIcono);
 
         JSONObject sensorJson = getItem(position);
         if(null != sensorJson){
             try {
+                String mDrawableName = this.iconos.get(sensorJson.getString("des_tipo"));
+                int resID = this.resources.getIdentifier(mDrawableName , "drawable", this.packageName);
+                Drawable drawable = this.resources.getDrawable(resID );
+                imgIcono.setImageDrawable(drawable);
                 txtNombreSensor.setText(sensorJson.getString("nombre_sensor"));
                 txtDescripcionInstrumento.setText(sensorJson.getString("desc_instrumento"));
                 txtDescripcionTipo.setText(sensorJson.getString("des_tipo"));
