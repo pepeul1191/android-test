@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="softweb.pe.testpp.EstacionActivity">
+    tools:context="softweb.pe.testpp.EstacionActivity"
+    android:padding="20dp"
+    android:paddingTop="10dp">
 
     <RelativeLayout
         android:layout_width="368dp"
@@ -18,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre"
-            android:textSize="12dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/txtNombre"
@@ -41,7 +43,7 @@
             android:layout_below="@+id/txtNombre"
             android:layout_marginTop="11dp"
             android:text="Descripción"
-            android:textSize="12dp" />
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/txtDescipcion"
@@ -62,7 +64,7 @@
             android:layout_below="@+id/txtDescipcion"
             android:layout_marginTop="11dp"
             android:text="Sensores"
-            android:textSize="12dp" />
+            android:textSize="18dp" />
 
         <ListView
             android:id="@+id/listSensores"
