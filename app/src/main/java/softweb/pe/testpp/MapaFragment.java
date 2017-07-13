@@ -90,12 +90,8 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback, Google
             String urlDetalleEstacion = Constants.BASE_URL + "estacion/detalle/" + marker.getTag().toString();
             Httparty httpartyDetalleEstacion = new Httparty(urlDetalleEstacion, "GET");
             httpartyDetalleEstacion .action();
-
-            //JSONArray estacionesJsonArray = new JSONArray(httpartyDetalleEstacion.getRpta());
-
-            Log.d("onMarkerClick", marker.getTag().toString());
-            Log.d("onMarkerClick - MapaFragment", httpartyDetalleEstacion.getRpta());
-
+            //Log.d("onMarkerClick", marker.getTag().toString());
+            //Log.d("onMarkerClick - MapaFragment", httpartyDetalleEstacion.getRpta());
             Intent myIntent = new Intent(this.getActivity(), EstacionActivity.class);
             myIntent.putExtra("detalleEstacion", httpartyDetalleEstacion.getRpta());
             this.getActivity().startActivity(myIntent);

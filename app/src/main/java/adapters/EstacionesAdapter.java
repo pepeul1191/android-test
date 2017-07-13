@@ -1,8 +1,11 @@
 package adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,7 +20,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import softweb.pe.testpp.EstacionActivity;
+import softweb.pe.testpp.HistorialActivity;
 import softweb.pe.testpp.R;
+import utils.Constants;
+import utils.Httparty;
 
 
 public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
@@ -31,8 +38,10 @@ public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
         this.activity = activity;
         this.jsonArray = jsonArray;
         this.iconos.put("nudo","ic_viento");
-        this.iconos.put("grados celsius","ic_temperatura");
+        this.iconos.put("Grados centígrados (°C)","ic_temperatura");
         this.iconos.put("milibares","ic_lluvia");
+        this.iconos.put("Presion (mmHg)","ic_presion");
+        this.iconos.put("Humedad relativa del aire (%)","ic_humedad");
         this.resources = resources;
         this.packageName = packageName;
     }
@@ -87,6 +96,20 @@ public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
                 txtNombreSensor.setText(sensorJson.getString("nombre_sensor"));
                 txtDescripcionInstrumento.setText(sensorJson.getString("desc_instrumento"));
                 txtDescripcionTipo.setText(sensorJson.getString("des_tipo"));
+
+                convertView.setTag(sensorJson.getInt("ide_sensor"));
+                convertView.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        try{
+                            Intent myIntent = new Intent(activity, HistorialActivity.class);
+                            myIntent.putExtra("ide_sensor", view.getTag() + "");
+                            activity.startActivity(myIntent);
+                        }catch (Exception e){
+                            Log.d("TRY1", e.toString());
+                        }
+                    }
+                });
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -94,4 +117,5 @@ public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
 
         return convertView;
     }
+
 }

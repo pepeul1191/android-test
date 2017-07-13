@@ -30,6 +30,15 @@ import utils.Httparty;
 
 public class HistorialActivity extends AppCompatActivity implements OnChartGestureListener, OnChartValueSelectedListener {
     private LineChart mChart;
+    private int ideSensor;
+
+    public int getIdeSensor() {
+        return ideSensor;
+    }
+
+    public void setIdeSensor(int ideSensor) {
+        this.ideSensor = ideSensor;
+    }
 
     private ArrayList<String> setXAxisValues(JSONArray historicosJSON){
         ArrayList<String> xVals = new ArrayList<String>();
@@ -82,7 +91,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         ArrayList<Entry> yVals = null;
 
         try{
-            String urlHistorico = Constants.BASE_URL + "sensor/historico/1?fecha_inicio=2017-01-01&fecha_fin=2017-08-10";
+            String urlHistorico = Constants.BASE_URL + "sensor/historico/" + this.getIdeSensor() + "?fecha_inicio=2017-01-01&fecha_fin=2017-08-10";
             Httparty httpartyHistorico = new Httparty(urlHistorico, "GET");
             httpartyHistorico.action();
 
@@ -125,6 +134,8 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setIdeSensor(Integer.parseInt(getIntent().getStringExtra("ide_sensor")));
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_historial);
 
