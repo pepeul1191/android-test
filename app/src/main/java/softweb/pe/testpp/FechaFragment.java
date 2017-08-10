@@ -1,5 +1,6 @@
 package softweb.pe.testpp;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.net.Uri;
@@ -9,6 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
 
 /**
@@ -24,7 +28,9 @@ public class FechaFragment extends DialogFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private Button btnSelcionarFecha;
+    private DatePicker datePicker;
+    Activity activity;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -59,18 +65,19 @@ public class FechaFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fecha, container, false);
         //getDialog().setTitle("Simple Dialog");
-        Log.d("FRAGMENT", "onCreateView");
-        //btnReenviar = (Button) view.findViewById(R.id.btnReenviar);
-        //txtCorreo = (EditText) view.findViewById(R.id.txtCorreo);
-        /*
-        btnReenviar.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               activity = getActivity();
-                                               Toast.makeText(v.getContext(), "correo ingresado : " + txtCorreo.getText().toString(), Toast.LENGTH_SHORT).show();
-                                               Log.d("FRAGMENT CLICK", txtCorreo.getText().toString());
-                                           }
-                                           */
+        btnSelcionarFecha = (Button) view.findViewById(R.id.btnSelcionarFecha);
+        datePicker = (DatePicker) view.findViewById(R.id.datePicker);
+        btnSelcionarFecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity = getActivity();
+                int dia = datePicker.getDayOfMonth();
+                int mes = datePicker.getMonth() + 1;
+                int anio = datePicker.getYear();
+                Toast.makeText(v.getContext(), "Fecha selccionada : " + dia + "/" + mes + "/" + anio, Toast.LENGTH_SHORT).show();
+                //Log.d("FRAGMENT CLICK", txtCorreo.getText().toString());
+            }
+        });
         return view;
     }
 
