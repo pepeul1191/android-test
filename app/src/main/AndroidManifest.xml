@@ -81,9 +81,6 @@
             android:value="AIzaSyA3F8CQMAE147iISaPf_dQ3tSda2oOoec0" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".EstacionActivity"
             android:label="Detalle de Estación">
         </activity>
