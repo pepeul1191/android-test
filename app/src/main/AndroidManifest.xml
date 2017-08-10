@@ -83,7 +83,10 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".EstacionActivity" />
+        <activity
+            android:name=".EstacionActivity"
+            android:label="Detalle de Estación">
+        </activity>
     </application>
 
 </manifest>
