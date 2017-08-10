@@ -27,7 +27,9 @@
             android:orientation="vertical"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:id="@+id/linearFechaInicio"
+            android:onClick="btnSetFechaInicio">
 
             <TextView
                 android:id="@+id/lblNombre2"
@@ -54,7 +56,8 @@
             android:layout_height="495dp"
             android:orientation="vertical"
             tools:layout_editor_absoluteY="8dp"
-            tools:layout_editor_absoluteX="8dp">
+            tools:layout_editor_absoluteX="8dp"
+            android:onClick="btnSetFechaFin">
 
             <TextView
                 android:id="@+id/lblNombre"

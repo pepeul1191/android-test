@@ -1,12 +1,17 @@
 package softweb.pe.testpp;
 
+import android.app.FragmentManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -28,9 +33,10 @@ import java.util.ArrayList;
 import utils.Constants;
 import utils.Httparty;
 
-public class HistorialActivity extends AppCompatActivity implements OnChartGestureListener, OnChartValueSelectedListener {
+public class HistorialActivity extends AppCompatActivity implements OnChartGestureListener, OnChartValueSelectedListener, FechaFragment.OnFragmentInteractionListener{
     private LineChart mChart;
     private int ideSensor;
+    private LinearLayout linearFechaInicio;
 
     public int getIdeSensor() {
         return ideSensor;
@@ -38,6 +44,26 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
 
     public void setIdeSensor(int ideSensor) {
         this.ideSensor = ideSensor;
+    }
+
+    public void btnSetFechaInicio(View v) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(HistorialActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.fragment_fecha, null);
+        Log.d("btnSetFechaInicio","ANTES");
+
+        FragmentManager fm = getFragmentManager();
+        FechaFragment dialogFragment = new FechaFragment();
+        dialogFragment.show(fm, "Sample Fragment");
+    }
+
+    public void btnSetFechaFin(View v) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(HistorialActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.fragment_fecha, null);
+        Log.d("btnSetFechaInicio","ANTES");
+
+        FragmentManager fm = getFragmentManager();
+        FechaFragment dialogFragment = new FechaFragment();
+        dialogFragment.show(fm, "Sample Fragment");
     }
 
     private ArrayList<String> setXAxisValues(JSONArray historicosJSON){
@@ -207,5 +233,10 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
     @Override
     public void onNothingSelected() {
         Log.i("Nothing selected", "Nothing selected.");
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
