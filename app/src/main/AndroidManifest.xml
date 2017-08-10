@@ -48,7 +48,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ApplicationActivity"
-            android:label="@string/title_activity_application">
+            android:label="Quinua Smart">
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,7 +60,7 @@
 
         <activity
             android:name=".HistorialActivity"
-            android:label="@string/title_activity_application">
+            android:label="Historial del Sensor">
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,7 +78,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyA3F8CQMAE147iISaPf_dQ3tSda2oOoec0" />
 
         <activity
             android:name=".MapsActivity"
