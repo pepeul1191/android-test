@@ -32,14 +32,13 @@
             android:onClick="btnSetFechaInicio">
 
             <TextView
-                android:id="@+id/lblNombre2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fecha Inicio"
                 android:textSize="18dp" />
 
-            <EditText
-                android:id="@+id/txtUsuario"
+            <TextView
+                android:id="@+id/txtInicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

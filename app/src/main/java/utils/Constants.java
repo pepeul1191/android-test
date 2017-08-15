@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Constants {
     private static HashMap<String, String> mapa = new HashMap<String, String>();
 
-    public static final String BASE_URL = "http://172.16.28.50:3000/"; //http://45.55.64.102:3000/";//"";
+    public static final String BASE_URL = "https://quinua-smart.000webhostapp.com/git ";//"http://172.16.28.50:3000/"; //http://45.55.64.102:3000/";//"";
 
     public static void set(String llave, String valor){
         mapa.put(llave, valor);

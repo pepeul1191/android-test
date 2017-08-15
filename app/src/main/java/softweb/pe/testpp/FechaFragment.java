@@ -14,22 +14,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FechaFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FechaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FechaFragment extends DialogFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Button btnSelcionarFecha;
     private DatePicker datePicker;
+    private String fechaSeleccionadaString;
     Activity activity;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -39,6 +29,10 @@ public class FechaFragment extends DialogFragment {
 
     public FechaFragment() {
         // Required empty public constructor
+    }
+
+    public String getFechaSeleccionadaString() {
+        return fechaSeleccionadaString;
     }
 
     public static FechaFragment newInstance(String param1, String param2) {
@@ -74,10 +68,12 @@ public class FechaFragment extends DialogFragment {
                 int dia = datePicker.getDayOfMonth();
                 int mes = datePicker.getMonth() + 1;
                 int anio = datePicker.getYear();
-                Toast.makeText(v.getContext(), "Fecha selccionada : " + dia + "/" + mes + "/" + anio, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), "Fecha selccionada : " + dia + "/" + mes + "/" + anio, Toast.LENGTH_SHORT).show();
                 //Log.d("FRAGMENT CLICK", txtCorreo.getText().toString());
+                fechaSeleccionadaString = dia + "/" + mes + "/" + anio;
             }
         });
+
         return view;
     }
 
@@ -102,6 +98,7 @@ public class FechaFragment extends DialogFragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.d("onDetach", fechaSeleccionadaString);
         mListener = null;
     }
 

@@ -49,18 +49,15 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
     public void btnSetFechaInicio(View v) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(HistorialActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.fragment_fecha, null);
-        Log.d("btnSetFechaInicio","ANTES");
-
         FragmentManager fm = getFragmentManager();
         FechaFragment dialogFragment = new FechaFragment();
         dialogFragment.show(fm, "Sample Fragment");
+        //Log.d("getFechaSeleccionadaString", dialogFragment.getFechaSeleccionadaString());
     }
 
     public void btnSetFechaFin(View v) {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(HistorialActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.fragment_fecha, null);
-        Log.d("btnSetFechaInicio","ANTES");
-
         FragmentManager fm = getFragmentManager();
         FechaFragment dialogFragment = new FechaFragment();
         dialogFragment.show(fm, "Sample Fragment");
