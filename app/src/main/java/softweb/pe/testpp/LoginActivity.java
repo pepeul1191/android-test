@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements ReenvioFragment.
     public void btnIngresarClick(View v) {
         String usuario = txtUsuario.getText().toString();
         String contrasenia = txtContrasenia.getText().toString();
-        String urlLogin = Constants.BASE_URL + "login/acceder?usuario=" + usuario + "&contrasenia=" + contrasenia;
+        String urlLogin = Constants.BASE_URL + "usuario/acceder?usuario=" + usuario + "&contrasenia=" + contrasenia;
         String rpta = "";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

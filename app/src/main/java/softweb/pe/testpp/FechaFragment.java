@@ -7,14 +7,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class FechaFragment extends DialogFragment {
+public class FechaFragment extends DialogFragment implements TextView.OnEditorActionListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Button btnSelcionarFecha;
@@ -68,20 +70,16 @@ public class FechaFragment extends DialogFragment {
                 int dia = datePicker.getDayOfMonth();
                 int mes = datePicker.getMonth() + 1;
                 int anio = datePicker.getYear();
-                //Toast.makeText(v.getContext(), "Fecha selccionada : " + dia + "/" + mes + "/" + anio, Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Fecha selccionada : " + dia + "/" + mes + "/" + anio, Toast.LENGTH_SHORT).show();
                 //Log.d("FRAGMENT CLICK", txtCorreo.getText().toString());
                 fechaSeleccionadaString = dia + "/" + mes + "/" + anio;
+                HistorialActivity activity = (HistorialActivity) getActivity();
+                activity.onFinishEditDialog(fechaSeleccionadaString);
+                dismiss();
             }
         });
 
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -102,8 +100,12 @@ public class FechaFragment extends DialogFragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        return false;
+    }
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFinishEditDialog(String inputText);
     }
 }

@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -37,6 +38,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
     private LineChart mChart;
     private int ideSensor;
     private LinearLayout linearFechaInicio;
+    private TextView txtInicio;
 
     public int getIdeSensor() {
         return ideSensor;
@@ -65,11 +67,6 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
 
     private ArrayList<String> setXAxisValues(JSONArray historicosJSON){
         ArrayList<String> xVals = new ArrayList<String>();
-        //xVals.add("10");
-        //xVals.add("20");
-        //xVals.add("30");
-        //xVals.add("30.5");
-        //xVals.add("40");
 
         for (int i=0; i < historicosJSON.length(); i++) {
             try {
@@ -86,11 +83,6 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
 
     private ArrayList<Entry> setYAxisValues(JSONArray historicosJSON){
         ArrayList<Entry> yVals = new ArrayList<Entry>();
-        //yVals.add(new Entry(60, 0));
-        //yVals.add(new Entry(48, 1));
-        //yVals.add(new Entry(70.5f, 2));
-        //yVals.add(new Entry(100, 3));
-        //yVals.add(new Entry(180.9f, 4));
 
         for (int i=0; i < historicosJSON.length(); i++) {
             try {
@@ -168,6 +160,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         l.setForm(Legend.LegendForm.LINE);
         mChart.setOnChartGestureListener(this);
         mChart.setOnChartValueSelectedListener(this);
+        txtInicio = (TextView) findViewById(R.id.txtInicio);
     }
 
     @Override
@@ -232,8 +225,9 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         Log.i("Nothing selected", "Nothing selected.");
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
 
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        txtInicio.setText(inputText);
     }
 }
