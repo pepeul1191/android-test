@@ -39,6 +39,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
     private int ideSensor;
     private LinearLayout linearFechaInicio;
     private TextView txtInicio;
+    private TextView txtFin;
 
     public int getIdeSensor() {
         return ideSensor;
@@ -53,6 +54,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         View mView = getLayoutInflater().inflate(R.layout.fragment_fecha, null);
         FragmentManager fm = getFragmentManager();
         FechaFragment dialogFragment = new FechaFragment();
+        dialogFragment.setIdOrigen("txtInicio");
         dialogFragment.show(fm, "Sample Fragment");
         //Log.d("getFechaSeleccionadaString", dialogFragment.getFechaSeleccionadaString());
     }
@@ -62,6 +64,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         View mView = getLayoutInflater().inflate(R.layout.fragment_fecha, null);
         FragmentManager fm = getFragmentManager();
         FechaFragment dialogFragment = new FechaFragment();
+        dialogFragment.setIdOrigen("txtFin");
         dialogFragment.show(fm, "Sample Fragment");
     }
 
@@ -161,6 +164,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         mChart.setOnChartGestureListener(this);
         mChart.setOnChartValueSelectedListener(this);
         txtInicio = (TextView) findViewById(R.id.txtInicio);
+        txtFin = (TextView) findViewById(R.id.txtFin);
     }
 
     @Override
@@ -228,6 +232,11 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
 
     @Override
     public void onFinishEditDialog(String inputText) {
-        txtInicio.setText(inputText);
+        String[] rpta = inputText.split("::");
+        if (rpta[1].equalsIgnoreCase("txtInicio")){
+            txtInicio.setText(rpta[0]);
+        }else if(rpta[1].equalsIgnoreCase("txtFin")){
+            txtFin.setText(rpta[0]);
+        }
     }
 }

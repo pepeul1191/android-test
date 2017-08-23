@@ -22,6 +22,7 @@ public class FechaFragment extends DialogFragment implements TextView.OnEditorAc
     private Button btnSelcionarFecha;
     private DatePicker datePicker;
     private String fechaSeleccionadaString;
+    private String idOrigen;
     Activity activity;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,7 +75,7 @@ public class FechaFragment extends DialogFragment implements TextView.OnEditorAc
                 //Log.d("FRAGMENT CLICK", txtCorreo.getText().toString());
                 fechaSeleccionadaString = dia + "/" + mes + "/" + anio;
                 HistorialActivity activity = (HistorialActivity) getActivity();
-                activity.onFinishEditDialog(fechaSeleccionadaString);
+                activity.onFinishEditDialog(fechaSeleccionadaString + "::" + idOrigen);
                 dismiss();
             }
         });
@@ -103,6 +104,14 @@ public class FechaFragment extends DialogFragment implements TextView.OnEditorAc
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         return false;
+    }
+
+    public String getIdOrigen() {
+        return idOrigen;
+    }
+
+    public void setIdOrigen(String idOrigen) {
+        this.idOrigen = idOrigen;
     }
 
     public interface OnFragmentInteractionListener {

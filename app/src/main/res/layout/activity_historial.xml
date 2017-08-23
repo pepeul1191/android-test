@@ -59,14 +59,13 @@
             android:onClick="btnSetFechaFin">
 
             <TextView
-                android:id="@+id/lblNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Fecha Fin"
                 android:textSize="18dp" />
 
-            <EditText
-                android:id="@+id/txtUsuarios"
+            <TextView
+                android:id="@+id/txtFin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
