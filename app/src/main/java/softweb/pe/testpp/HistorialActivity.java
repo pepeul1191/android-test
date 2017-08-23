@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,7 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
     private LinearLayout linearFechaInicio;
     private TextView txtInicio;
     private TextView txtFin;
+    private Button btnEnviarRangoFechas;
 
     public int getIdeSensor() {
         return ideSensor;
@@ -47,6 +49,19 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
 
     public void setIdeSensor(int ideSensor) {
         this.ideSensor = ideSensor;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setIdeSensor(Integer.parseInt(getIntent().getStringExtra("ide_sensor")));
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_historial);
+
+        mChart = (LineChart) findViewById(R.id.linechart);
+        txtInicio = (TextView) findViewById(R.id.txtInicio);
+        txtFin = (TextView) findViewById(R.id.txtFin);
     }
 
     public void btnSetFechaInicio(View v) {
@@ -57,6 +72,16 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         dialogFragment.setIdOrigen("txtInicio");
         dialogFragment.show(fm, "Sample Fragment");
         //Log.d("getFechaSeleccionadaString", dialogFragment.getFechaSeleccionadaString());
+    }
+
+    public void btnEnviarRangoFechasClick(View v){
+        Log.d("TAB", "btnEnviarRangoFechasClick");
+        this.setData();
+        Legend l = mChart.getLegend();
+        l.setForm(Legend.LegendForm.LINE);
+        mChart.setOnChartGestureListener(this);
+        mChart.setOnChartValueSelectedListener(this);
+        //mChart.
     }
 
     public void btnSetFechaFin(View v) {
@@ -109,7 +134,8 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
         ArrayList<Entry> yVals = null;
 
         try{
-            String urlHistorico = Constants.BASE_URL + "sensor/historico/" + this.getIdeSensor() + "?fecha_inicio=2017-01-01&fecha_fin=2017-08-10";
+            //String urlHistorico = Constants.BASE_URL + "sensor/historico/" + this.getIdeSensor() + "?fecha_inicio=2017-01-01&fecha_fin=2017-08-10";
+            String urlHistorico = Constants.BASE_URL + "sensor/historico/" + this.getIdeSensor() + "?fecha_inicio=" + txtInicio.getText() + "&fecha_fin=" + txtFin.getText();
             Httparty httpartyHistorico = new Httparty(urlHistorico, "GET");
             httpartyHistorico.action();
 
@@ -143,28 +169,9 @@ public class HistorialActivity extends AppCompatActivity implements OnChartGestu
 
         // create a data object with the datasets
         LineData data = new LineData(xVals, dataSets);
-
+        Log.d("SETDATE", "XD");
         // set data
         mChart.setData(data);
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.setIdeSensor(Integer.parseInt(getIntent().getStringExtra("ide_sensor")));
-
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_historial);
-
-        mChart = (LineChart) findViewById(R.id.linechart);
-        this.setData();
-        Legend l = mChart.getLegend();
-        l.setForm(Legend.LegendForm.LINE);
-        mChart.setOnChartGestureListener(this);
-        mChart.setOnChartValueSelectedListener(this);
-        txtInicio = (TextView) findViewById(R.id.txtInicio);
-        txtFin = (TextView) findViewById(R.id.txtFin);
     }
 
     @Override

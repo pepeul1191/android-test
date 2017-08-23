@@ -73,7 +73,7 @@ public class FechaFragment extends DialogFragment implements TextView.OnEditorAc
                 int anio = datePicker.getYear();
                 Toast.makeText(v.getContext(), "Fecha selccionada : " + dia + "/" + mes + "/" + anio, Toast.LENGTH_SHORT).show();
                 //Log.d("FRAGMENT CLICK", txtCorreo.getText().toString());
-                fechaSeleccionadaString = dia + "/" + mes + "/" + anio;
+                fechaSeleccionadaString = anio + "-" + mes + "-" + dia;
                 HistorialActivity activity = (HistorialActivity) getActivity();
                 activity.onFinishEditDialog(fechaSeleccionadaString + "::" + idOrigen);
                 dismiss();
