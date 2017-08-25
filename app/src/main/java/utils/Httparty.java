@@ -1,5 +1,7 @@
 package utils;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,6 +17,9 @@ public class Httparty {
 
     public Httparty(String url, String metodo){
         this.url = url;
+        Log.d("1","++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        Log.d("URL", url);
+        Log.d("2","++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         this.metodo = metodo;
         this.rpta = "";
     }

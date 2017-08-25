@@ -37,7 +37,7 @@ public class EstacionesAdapter extends BaseAdapter implements ListAdapter{
     public EstacionesAdapter(Activity activity, JSONArray jsonArray, Resources resources, String packageName) {
         this.activity = activity;
         this.jsonArray = jsonArray;
-        this.iconos.put("nudo","ic_viento");
+        this.iconos.put("Velocidad (m/s)","ic_viento");
         this.iconos.put("Grados centígrados (°C)","ic_temperatura");
         this.iconos.put("milibares","ic_lluvia");
         this.iconos.put("Presion (mmHg)","ic_presion");
